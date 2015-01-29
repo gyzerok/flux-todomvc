@@ -3,8 +3,10 @@
 module.exports = function (grunt) {
 
     grunt.registerTask('default', [
-        'clean:dist',
-        'copy:app',
-        'browserify:app'
+        'clean',
+        'copy',
+        'connect',
+        'browserify',
+        'watch'
     ]);
 };

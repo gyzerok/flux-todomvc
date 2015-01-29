@@ -2,7 +2,7 @@
 
 var TodoApp = React.createClass({
     render: () => (
-        <div id="application">Hello blat!</div>
+        <div id="application">Hello World!</div>
     )
 });
 

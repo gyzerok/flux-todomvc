@@ -6,11 +6,13 @@ module.exports = function (grunt) {
         app: {
             options: {
                 debug: false,
+                watch: true,
                 transform: [
                     ['reactify', { es6: true }]
+                    //['uglifyify', { global: true }]
                 ]
             },
-            src: ['src/app/index.js'],
+            src: 'src/app/index.js',
             dest: 'dist/assets/js/bundle.js'
         }
     });
