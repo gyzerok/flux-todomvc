@@ -1,9 +1,13 @@
 'use strict';
 
 var TodoApp = React.createClass({
-    render: () => (
-        <div id="application">Hello World!</div>
-    )
+    render: () => {
+        return (
+            <div id="application">
+                Hello React!
+            </div>
+        )
+    }
 });
 
 module.exports = TodoApp;
