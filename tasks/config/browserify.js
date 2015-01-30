@@ -8,7 +8,8 @@ module.exports = function (grunt) {
                 debug: false,
                 watch: true,
                 transform: [
-                    ['reactify', { es6: true }]
+                    '6to5ify'
+                    //['reactify', { es6: true }]
                     //['uglifyify', { global: true }]
                 ]
             },
