@@ -4,17 +4,17 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var TodoConstants = require('../constants/TodoConstants');
 
 module.exports = {
-    add: data => {
+    add: function (text) {
         AppDispatcher.handleViewAction({
             actionType: TodoConstants.ADD,
-            data: data
+            data: { text: text }
         });
     },
 
-    remove: id => {
+    remove: function (id) {
         AppDispatcher.handleViewAction({
             actionType: TodoConstants.REMOVE,
-            data: id
+            data: { id: id }
         });
     }
 };
