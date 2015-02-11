@@ -41,7 +41,8 @@ var TodoStore = assign({}, EventEmitter.prototype, {
     }
 });
 
-AppDispatcher.register(function (action) {
+AppDispatcher.register(function (payload) {
+    var action = payload.action;
 
     switch (action.actionType) {
         case TodoConstants.ADD:
