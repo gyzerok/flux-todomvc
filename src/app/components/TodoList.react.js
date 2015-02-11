@@ -12,9 +12,10 @@ var TodoList = React.createClass({
                     key={todo.id}
                     id={todo.id}
                     text={todo.text}
+                    onRemove={this.props.onRemove}
                 />
             )
-        });
+        }.bind(this));
 
         return (
             <ul>{todos}</ul>
@@ -22,4 +23,4 @@ var TodoList = React.createClass({
     }
 });
 
-module.exports= TodoList;
+module.exports = TodoList;

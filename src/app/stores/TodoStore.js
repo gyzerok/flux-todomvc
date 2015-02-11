@@ -16,6 +16,12 @@ function add(text) {
     });
 }
 
+function remove(id) {
+    todos = _.remove(todos, function (todo) {
+        return todo.id !== id;
+    });
+}
+
 var TodoStore = assign({}, EventEmitter.prototype, {
 
     notify: function () {
@@ -40,9 +46,13 @@ AppDispatcher.register(function (action) {
     switch (action.actionType) {
         case TodoConstants.ADD:
             add(action.data.text);
-            TodoStore.notify();
+            break;
+        case TodoConstants.REMOVE:
+            remove(action.data.id);
             break;
     }
+
+    TodoStore.notify();
 });
 
 module.exports = TodoStore;

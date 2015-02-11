@@ -35,13 +35,20 @@ var TodoApp = React.createClass({
                     value=""
                     onSave={this.onSave}
                 />
-                <TodoList todos={this.state.todos} />
+                <TodoList
+                    todos={this.state.todos}
+                    onRemove={this.onRemove}
+                />
             </div>
         )
     },
 
     onSave: function (text) {
         TodoActions.add(text);
+    },
+
+    onRemove: function (id) {
+        TodoActions.remove(id);
     }
 });
 
