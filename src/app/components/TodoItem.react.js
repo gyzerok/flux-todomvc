@@ -4,8 +4,7 @@ var TodoItem = React.createClass({
     render: function () {
         return (
             <li id={this.props.id}>
-                {this.props.text + ' '}
-                <a href="#">edit</a>
+                {this.props.text}
                 {' '}
                 <a href="#" onClick={this.onRemove}>delete</a>
             </li>
