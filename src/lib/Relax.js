@@ -37,9 +37,7 @@
         createDispatcher: function (opts) {
             opts = opts || {};
 
-            var Dispatcher = new FBDispatcher();
-
-            assign(Dispatcher, {
+            var Dispatcher = assign(new FBDispatcher(), {
 
                 handleViewAction: function(action) {
                     this.dispatch({
@@ -58,7 +56,7 @@
                 subscribe: function (Store, actions) {
                     if (actions === {}) throw new Error('You have to provide store for subscription');
 
-                    Store.__dispatcherIndex = Dispatcher.register(function (payload) {
+                    Store.__dispatcherIndex = this.register(function (payload) {
                         var action = payload.action;
 
                         for (var actionType in actions) {
@@ -70,14 +68,14 @@
                 },
 
                 unsubscribe: function(Store) {
-                    Dispatcher.unsubscribe(Store.__dispatcherIndex);
+                    this.unregister(Store.__dispatcherIndex);
                 },
 
                 await: function (stores) {
                     var ids = stores.map(function (Store) {
                         return Store.__dispatcherIndex;
                     });
-                    Dispatcher.waitFor(ids);
+                    this.waitFor(ids);
                 }
             }, opts);
 
