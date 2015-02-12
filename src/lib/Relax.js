@@ -33,36 +33,36 @@ var Relax = (function () {
         createDispatcher: function (opts) {
             var Dispatcher = new FBDispatcher();
 
-            Dispatcher.handleViewAction = function (action) {
-                this.dispatch({
-                    source: 'VIEW_ACTION',
-                    action: action
-                });
-            };
+            assign(Dispatcher, {
 
-            Dispatcher.handleServerAction = function (action) {
-                this.dispatch({
-                    source: 'SERVER_ACTION',
-                    action: action
-                });
-            };
+                handleViewAction: function(action) {
+                    this.dispatch({
+                        source: 'VIEW_ACTION',
+                        action: action
+                    });
+                },
 
-            Dispatcher.subscribe = function (sub) {
-                if (!sub.actions) throw new Error('Incorrect subscriber');
+                handleServerAction: function (action) {
+                    this.dispatch({
+                        source: 'SERVER_ACTION',
+                        action: action
+                    });
+                },
 
-                Dispatcher.register(function (payload) {
-                    var action = payload.action;
+                subscribe: function (store, actions) {
+                    if (actions === {}) throw new Error('You have to provide store for subscription');
 
-                    for (var actionType in sub.actions) {
-                        if (actionType !== action.actionType) continue;
-                        var isDataChanged = sub.actions[actionType](action.data, payload.source);
-                        if (isDataChanged) sub.emitChange();
-                    }
-                });
-            };
+                    Dispatcher.register(function (payload) {
+                        var action = payload.action;
 
-            var subs = opts.subscribers();
-            subs.forEach(Dispatcher.subscribe);
+                        for (var actionType in actions) {
+                            if (actionType !== action.actionType) continue;
+                            var isDataChanged = actions[actionType](action.data, payload.source);
+                            if (isDataChanged) store.emitChange();
+                        }
+                    });
+                }
+            }, opts);
 
             return Dispatcher;
         }

@@ -1,5 +1,7 @@
 'use strict';
 
+var AppDispatcher = require('../dispatcher/AppDispatcher');
+
 var todos = [];
 
 function add(data) {
@@ -22,14 +24,15 @@ function remove(data) {
 }
 
 var TodoStore = Relax.createStore({
-    actions: {
-        'add-todo': add,
-        'remove-todo': remove
-    },
 
     getAll: function () {
         return todos;
     }
+});
+
+AppDispatcher.subscribe(TodoStore, {
+    'add-todo': add,
+    'remove-todo': remove
 });
 
 module.exports = TodoStore;
