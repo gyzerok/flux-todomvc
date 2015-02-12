@@ -1,13 +1,13 @@
-var FBDispatcher = require('flux').Dispatcher;
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-
-var Relax = (function () {
+(function () {
     'use strict';
+
+    var FBDispatcher = require('flux').Dispatcher;
+    var EventEmitter = require('events').EventEmitter;
+    var assign = require('object-assign');
 
     var CHANGE_EVENT = 'relax:change';
 
-    return {
+    var Relax = {
 
         uid: function () {
             return (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
@@ -70,7 +70,18 @@ var Relax = (function () {
 
             return Dispatcher;
         }
+    };
+
+    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+        module.exports = Relax;
+    }
+    else {
+        if (typeof define === 'function' && define.amd) {
+            define([], function () {
+                return Relax;
+            });
+        } else {
+            window.Relax = Relax;
+        }
     }
 })();
-
-module.exports = Relax;
