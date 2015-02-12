@@ -1,20 +1,19 @@
 'use strict';
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-var TodoConstants = require('../constants/TodoConstants');
 
 module.exports = {
-    add: function (text) {
+    add: function (data) {
         AppDispatcher.handleViewAction({
-            actionType: TodoConstants.ADD,
-            data: { text: text }
+            actionType: 'add-todo',
+            data: data
         });
     },
 
-    remove: function (id) {
+    remove: function (data) {
         AppDispatcher.handleViewAction({
-            actionType: TodoConstants.REMOVE,
-            data: { id: id }
+            actionType: 'remove-todo',
+            data: data
         });
     }
 };

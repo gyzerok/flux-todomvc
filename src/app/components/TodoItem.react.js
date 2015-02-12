@@ -1,6 +1,7 @@
 'use strict';
 
 var TodoItem = React.createClass({
+
     render: function () {
         return (
             <li id={this.props.id}>

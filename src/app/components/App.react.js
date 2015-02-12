@@ -44,11 +44,11 @@ var TodoApp = React.createClass({
     },
 
     onSave: function (text) {
-        TodoActions.add(text);
+        TodoActions.add({ text: text });
     },
 
     onRemove: function (id) {
-        TodoActions.remove(id);
+        TodoActions.remove({ id: id });
     }
 });
 

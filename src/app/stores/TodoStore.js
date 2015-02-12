@@ -1,59 +1,35 @@
 'use strict';
 
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var TodoConstants = require('../constants/TodoConstants');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-
-var CHANGE_EVENT = 'change';
 var todos = [];
 
-function add(text) {
+function add(data) {
     var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+
     todos.push({
         id: id,
-        text: text
+        text: data.text
     });
+
+    return true;
 }
 
-function remove(id) {
+function remove(data) {
     todos = _.remove(todos, function (todo) {
-        return todo.id !== id;
+        return todo.id !== data.id;
     });
+
+    return true;
 }
 
-var TodoStore = assign({}, EventEmitter.prototype, {
-
-    notify: function () {
-        this.emit(CHANGE_EVENT);
-    },
-
-    onChange: function (cb) {
-        this.on(CHANGE_EVENT, cb);
-    },
-
-    offChange: function (cb) {
-        this.removeListener(CHANGE_EVENT, cb);
+var TodoStore = Relax.createStore({
+    actions: {
+        'add-todo': add,
+        'remove-todo': remove
     },
 
     getAll: function () {
         return todos;
     }
-});
-
-AppDispatcher.register(function (payload) {
-    var action = payload.action;
-
-    switch (action.actionType) {
-        case TodoConstants.ADD:
-            add(action.data.text);
-            break;
-        case TodoConstants.REMOVE:
-            remove(action.data.id);
-            break;
-    }
-
-    TodoStore.notify();
 });
 
 module.exports = TodoStore;
