@@ -16,7 +16,6 @@
         createStore: function (opts) {
 
             var Store = assign({}, EventEmitter.prototype, {
-                actions: {},
 
                 emitChange: function () {
                     this.emit(CHANGE_EVENT);
@@ -53,18 +52,29 @@
                     });
                 },
 
-                subscribe: function (store, actions) {
+                subscribe: function (Store, actions) {
                     if (actions === {}) throw new Error('You have to provide store for subscription');
 
-                    Dispatcher.register(function (payload) {
+                    Store.__dispatcherIndex = Dispatcher.register(function (payload) {
                         var action = payload.action;
 
                         for (var actionType in actions) {
                             if (actionType !== action.actionType) continue;
                             var isDataChanged = actions[actionType](action.data, payload.source);
-                            if (isDataChanged) store.emitChange();
+                            if (isDataChanged) Store.emitChange();
                         }
                     });
+                },
+
+                unsubscribe: function(Store) {
+                    Dispatcher.unsubscribe(Store.__dispatcherIndex);
+                },
+
+                await: function (stores) {
+                    var ids = stores.map(function (Store) {
+                        return Store.__dispatcherIndex;
+                    });
+                    Dispatcher.waitFor(ids);
                 }
             }, opts);
 
