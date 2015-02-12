@@ -5,10 +5,8 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var todos = [];
 
 function add(data) {
-    var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
-
     todos.push({
-        id: id,
+        id: Relax.uid(),
         text: data.text
     });
 

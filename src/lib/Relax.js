@@ -9,6 +9,10 @@ var Relax = (function () {
 
     return {
 
+        uid: function () {
+            return (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+        },
+
         createStore: function (opts) {
 
             var Store = assign({}, EventEmitter.prototype, {
