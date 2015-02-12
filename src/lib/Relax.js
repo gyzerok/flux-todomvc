@@ -14,6 +14,7 @@
         },
 
         createStore: function (opts) {
+            opts = opts || {};
 
             var Store = assign({}, EventEmitter.prototype, {
 
