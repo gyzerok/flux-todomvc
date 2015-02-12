@@ -34,6 +34,8 @@
         },
 
         createDispatcher: function (opts) {
+            opts = opts || {};
+
             var Dispatcher = new FBDispatcher();
 
             assign(Dispatcher, {
