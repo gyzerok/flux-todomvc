@@ -88,13 +88,12 @@
     if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
         module.exports = Relax;
     }
+    else if (typeof define === 'function' && define.amd) {
+        define([], function () {
+            return Relax;
+        });
+    }
     else {
-        if (typeof define === 'function' && define.amd) {
-            define([], function () {
-                return Relax;
-            });
-        } else {
-            window.Relax = Relax;
-        }
+        window.Relax = Relax;
     }
 })();
