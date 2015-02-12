@@ -8,9 +8,7 @@ var TodoList = require('./TodoList.react');
 var TodoApp = React.createClass({
 
     getInitialState: function () {
-        return {
-            todos: TodoStore.getAll()
-        };
+        return { todos: TodoStore.getAll() };
     },
 
     componentDidMount: function () {
