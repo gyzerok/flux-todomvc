@@ -2,11 +2,12 @@
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
-var todos = [];
+var todos = Immutable.OrderedMap();;
 
 function add(data) {
-    todos.push({
-        id: Relax.uid(),
+    var id = Relax.uid();
+    todos = todos.set(id, {
+        id: id,
         text: data.text
     });
 
@@ -14,9 +15,7 @@ function add(data) {
 }
 
 function remove(data) {
-    todos = _.remove(todos, function (todo) {
-        return todo.id !== data.id;
-    });
+    todos = todos.delete(data.id);
 
     return true;
 }

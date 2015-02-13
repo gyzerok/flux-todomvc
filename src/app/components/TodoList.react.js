@@ -6,7 +6,7 @@ var TodoList = React.createClass({
 
     render: function () {
 
-        var todos = _.map(this.props.todos, function (todo) {
+        var todos = this.props.todos.map(function (todo) {
             return (
                 <TodoItem
                     key={todo.id}
@@ -15,10 +15,10 @@ var TodoList = React.createClass({
                     onRemove={this.props.onRemove}
                 />
             )
-        }.bind(this));
+        }, this);
 
         return (
-            <ul>{todos}</ul>
+            <ul>{todos.toArray()}</ul>
         );
     }
 });
