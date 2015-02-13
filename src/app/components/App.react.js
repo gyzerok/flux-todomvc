@@ -6,6 +6,7 @@ var InputText = require('./InputText.react');
 var TodoList = require('./TodoList.react');
 
 var TodoApp = React.createClass({
+    mixins: [React.addons.PureRenderMixin],
 
     getInitialState: function () {
         return { todos: TodoStore.getAll() };
@@ -20,7 +21,7 @@ var TodoApp = React.createClass({
     },
 
     storeDidChanged: function () {
-        this.setState({
+        this.replaceState({
             todos: TodoStore.getAll()
         })
     },
