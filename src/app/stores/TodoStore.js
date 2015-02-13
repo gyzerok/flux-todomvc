@@ -5,7 +5,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var todos = Immutable.OrderedMap();;
 
 function add(data) {
-    var id = Relax.uid();
+    var id = Date.now();
     todos = todos.set(id, {
         id: id,
         text: data.text
